@@ -1,0 +1,30 @@
+// 버튼으로 LED 점등 (배열 미사용) 
+
+const int BUTTON = 2;
+const int LED1 = 6;
+const int LED2 = 7;
+const int LED3 = 8;
+const int LED4 = 12;
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);
+  if (value == 0) {
+    digitalWrite(LED1, 1);
+    digitalWrite(LED2, 1);
+    digitalWrite(LED3, 1);
+    digitalWrite(LED4, 1);
+  } else {
+    digitalWrite(LED1, 0);
+    digitalWrite(LED2, 0);
+    digitalWrite(LED3, 0);
+    digitalWrite(LED4, 0);
+  }
+}

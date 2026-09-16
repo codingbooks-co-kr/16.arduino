@@ -1,0 +1,20 @@
+// 가변저항 10비트 중 9번 비트(=최상위 비트) 검사 후 LED 점멸 제어
+
+const int LED = 6;
+const int VARIABLE_R = A1;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = analogRead(VARIABLE_R);	// 가변저항값 읽기
+  Serial.println(value, BIN);			// 10진수를 2진 표현으로 시리얼 모니터에 출력
+  if (value & 0x200) {			// 최상위 비트가 1일 때
+    digitalWrite(LED, 1);			// LED 점등
+  } else {				// 최상위 비트가 0일 때
+    digitalWrite(LED, 0);			// LED 소등
+  }
+  delay(100);
+}

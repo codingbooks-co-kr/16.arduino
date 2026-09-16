@@ -1,0 +1,12 @@
+// 첫 코딩: LED를 0.5초 간격으로 점멸
+
+void setup() {
+  pinMode(13, OUTPUT);		// 13번 핀을 출력(OUTPUT)으로 설정
+}
+
+void loop() {
+  digitalWrite(13, 1);		// 13번 핀에 HIGH 신호 인가
+  delay(500);			// 500msec 시간 지연
+  digitalWrite(13, 0);		// 13번 핀에 LOW 신호 인가
+  delay(500);			// 500msec 시간 지연
+}

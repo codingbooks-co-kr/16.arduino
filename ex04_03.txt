@@ -1,0 +1,29 @@
+// 푸시버튼을 누르는 동안 DC모터 속도 증가, 버튼에서 손을 떼면 속도 감소
+
+const int BUTTON = 2;
+const int DCMOTOR_FWD = 9;
+const int DCMOTOR_BWD = 10;
+
+int speed = 0;		// 전역변수: 갱신되는 값(=누적값)은 전역변수에 저장
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(DCMOTOR_FWD, OUTPUT);
+  pinMode(DCMOTOR_BWD, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);  	// 지역변수 (버튼값 읽기)
+  if (value == 0) {
+    speed += 10;            		// speed는 10씩 증가
+  } else {
+    speed -= 10;            		// speed는 10씩 감소
+  }
+  speed = constrain(speed, 0, 255);	// speed값을 0∼255 범위로 제한 
+  analogWrite(DCMOTOR_FWD, speed);	// DC모터 속도 증감
+  analogWrite(DCMOTOR_BWD, 0);
+  Serial.print("Speed: ");
+  Serial.println(speed);			// 속도값을 시리얼 모니터 상에서 확인
+  delay(100);
+}

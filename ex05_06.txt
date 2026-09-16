@@ -1,0 +1,18 @@
+// digitalWrite() 함수를 사용한 LED 밝기 조절 모방
+
+const int LED = 6;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i < 10; i++) {		// 내부 for문을 10회 반복
+    for (int j = 0; j < 50; j++) {		// 50회 반복
+      digitalWrite(LED, 1);
+      delay(i);				// LED 점등시간
+      digitalWrite(LED, 0);
+      delay(10 - i);			// LED 소등시간
+    }
+  }
+}

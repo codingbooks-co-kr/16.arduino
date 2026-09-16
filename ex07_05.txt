@@ -1,0 +1,37 @@
+// 푸시버튼 2개로 부저 주파수음 조절 (유형1 사용)
+
+const int BUTTON1 = 2;
+const int BUTTON2 = 4;
+const int BUZZER = 13;
+int freq = 100;
+
+void setup() {
+  pinMode(BUTTON1, INPUT);
+  pinMode(BUTTON2, INPUT);
+  pinMode(BUZZER, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value1 = digitalRead(BUTTON1);	// 푸시버튼값1 읽기
+  int value2 = digitalRead(BUTTON2);	// 푸시버튼값2 읽기
+  if (value1 == 0) {			// 푸시버튼1을 누른 경우
+    freq_down();				// 함수 호출부 (유형1)
+  } else if (value2 == 0) {			// 푸시버튼2를 누른 경우
+    freq_up();				// 함수 호출부 (유형1)
+  }
+  freq = constrain(freq, 100, 1000);		// 주파수값 범위 제한: 100∼1000Hz
+  Serial.print("Freqency(Hz): ");
+  Serial.println(freq);			// 주파수값을 시리얼 모니터에 표시
+  delay(200);				// 주파수음 출력을 위한 지연시간: 200msec
+}
+
+void freq_down() {			// 함수 정의부 (유형1)
+  tone(BUZZER, freq, 200);		// 주파수음을 200msec 동안 출력
+  freq -= 100;
+}
+
+void freq_up() {				// 함수 정의부 (유형1)
+  tone(BUZZER, freq, 200);		// 주파수음을 200msec 동안 출력
+  freq += 100;
+}

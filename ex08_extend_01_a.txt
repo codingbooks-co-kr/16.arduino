@@ -1,0 +1,9 @@
+// 비트 세트: value의 0번째 비트를 1로 세트
+
+void setup() {
+  Serial.begin(9600);
+  byte value = 0b00001100;
+  bitSet(value, 0);		// 0번째 비트를 1로 set → 0b00001101
+  Serial.println(value, BIN);
+}
+void loop() {}

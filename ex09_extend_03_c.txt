@@ -1,0 +1,17 @@
+// 아두이노: 아스키코드를 문자, 10진수, 16진수, 2진수 순으로 출력
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("ASCII Table");
+  for (int i = 0; i < 128; i++) {
+    Serial.write(i);			// 0∼255(1바이트)의 정수 송신
+    Serial.print(", DEC: ");
+    Serial.print(i);			// 10진수 전송(기본), 또는 Serial.print(i, DEC);
+    Serial.print(", HEX: ");
+    Serial.print(i, HEX);		// 16진수 전송
+    Serial.print(", BIN: ");
+    Serial.println(i, BIN);		
+  }
+}
+
+void loop() { }

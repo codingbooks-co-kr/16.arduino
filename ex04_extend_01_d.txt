@@ -1,0 +1,10 @@
+// 비교 연산 결과
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println(5 > 0);
+  if (5 > 0) { Serial.println("OK"); }
+  if (5) { Serial.println("OK"); }
+}
+
+void loop() { }

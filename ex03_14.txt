@@ -1,0 +1,30 @@
+// 푸시버튼 2개로 LED 밝기 조절
+
+const int BUTTON1 = 2;
+const int BUTTON2 = 4;
+const int LED = 6;
+
+int brightness = 0; 				// LED 밝기값 (전역변수)
+
+void setup() {
+  pinMode(BUTTON1, INPUT);
+  pinMode(BUTTON2, INPUT);
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value1 = digitalRead(BUTTON1);		// 푸시버튼1 값 읽기
+  if (value1 == 0) {				// 푸시버튼1을 누른 경우
+    brightness++;					// 밝기값 증가
+  }
+  int value2 = digitalRead(BUTTON2);		// 푸시버튼2 값 읽기
+  if (value2 == 0) {				// 푸시버튼2를 누른 경우
+    brightness--;					// 밝기값 감소
+  }
+  brightness = constrain(brightness, 0, 255);		// 밝기값을  0∼255 범위로 제한
+  analogWrite(LED, brightness);			// LED에 밝기값 적용
+  Serial.print("Brightness: ");
+  Serial.println(brightness);				// 밝기값을 시리얼 모니터에서 확인
+  delay(10); 
+}

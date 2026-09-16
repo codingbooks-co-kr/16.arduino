@@ -1,0 +1,23 @@
+// 가변저항으로 LED 점멸시간 제어
+
+const int VARIABLE_R = A1;
+const int LED = 6;
+
+void setup() {
+  pinMode(VARIABLE_R, INPUT);
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = analogRead(VARIABLE_R);		// 가변저항값 읽기
+  int time = map(value, 0, 1023, 100, 1000);	// 새 가변저항값 범위: 100∼1000
+
+  digitalWrite(LED, 1);
+  delay(time);			// LED 점등 시간
+  digitalWrite(LED, 0);
+  delay(time);			// LED 소등 시간
+
+  Serial.print("On_Off Time: ");
+  Serial.println(time);		// LED 점멸시간을 시리얼 모니터로 전송 후 출력
+}

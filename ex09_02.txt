@@ -1,0 +1,22 @@
+// 키보드 문자로 부저음 제어
+
+const int BUZZER = 13;
+
+void setup() {
+  pinMode(BUZZER, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Please type k, i, m");
+}
+
+void loop() {
+  if (Serial.available()) {			// 수신 데이터가 있을 때
+    char c = Serial.read();			// 수신 데이터(문자) 읽기
+    if (c == 'k') {				// 수신 문자가 ‘k’일 때
+      tone(BUZZER, 262, 500);		// 262Hz 음을 500msec동안 출력
+    } else if (c == 'i') {			// 수신 문자가 ‘i’일 때
+      tone(BUZZER, 330, 500);		// 330Hz 음을 500msec동안 출력
+    } else if (c == 'm') {			// 수신 문자가 ‘m’일 때
+      tone(BUZZER, 392, 500);		// 392Hz 음을 500msec동안 출력
+    }
+  }
+}

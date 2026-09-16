@@ -1,0 +1,23 @@
+// 푸시버튼을 누르는 동안 LED 점멸 (함수유형2)
+
+const int BUTTON = 2;
+const int LED = 6;
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);		// 푸시버튼값 읽기
+  if (value == 0) {			// 푸시버튼을 누른 경우
+    blink(200);				// 함수 호출부 (유형2)
+  }
+}
+
+void blink(int time) {			// 함수 정의부 (유형2)
+  digitalWrite(LED, 1);
+  delay(time);
+  digitalWrite(LED, 0);
+  delay(time);
+}

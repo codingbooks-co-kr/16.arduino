@@ -1,0 +1,24 @@
+// 푸시버튼으로 LED 점등 (배열과 반복문 사용, 완성) 
+
+const int BUTTON = 2;
+const int LED[] = {6, 7, 8, 12};		// 요소수는 4개이므로 LED[4]와 같은 의미
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  for (int i = 0; i < 4; i++) {		// LED 4개핀 모두 OUTPUT으로 설정
+    pinMode(LED[i], OUTPUT);
+  }
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);		// 푸시버튼값 읽기
+  if (value == 0) {
+    for (int i = 0; i < 4; i++) {		// LED 4개핀 모두 점등
+      digitalWrite(LED[i], 1);
+    }
+  } else {
+    for (int i = 0; i < 4; i++) {		// LED 4개핀 모두 소등
+      digitalWrite(LED[i], 0);
+    }
+  }
+}

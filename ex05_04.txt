@@ -1,0 +1,25 @@
+// 푸시버튼을 누르면 경고음 발생
+
+const int BUTTON = 2;
+const int BUZZER = 13;
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(BUZZER, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);			// 푸시버튼값 읽기
+  if (value == 0) {
+    for (int i = 0; i <= 100; i++) {
+      float sin_value = sin(2 * 3.14 * i * 0.01);	// sin_value = –1.0∼1.0
+      float freq = 2000 + 1000 * sin_value;		// freq = 1000∼3000
+      Serial.print("Frequency: ");
+      Serial.println(freq);			// 주파수를 시리얼 모니터에서 확인
+      tone(BUZZER, freq);			// 1000∼3000Hz의 주파수음 출력
+      delay(10);
+    }
+  }
+  noTone(BUZZER);			// 무음
+}

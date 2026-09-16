@@ -1,0 +1,13 @@
+// LED 0.5초 간격 점멸 (아두이노 코드)
+
+const int LED = 6;
+void setup() {
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(LED, 1);
+  delay(500);
+  digitalWrite(LED, 0);
+  delay(500);
+}

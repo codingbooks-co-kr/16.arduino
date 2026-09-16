@@ -1,0 +1,24 @@
+// 푸시버튼을 누르면 한 옥타브의 음정 주파수에 해당하는 부저음 출력
+
+const int BUTTON = 2;
+const int BUZZER = 13;
+
+int note[] = {262, 294, 330, 349, 392, 440, 494, 524};	// 배열 요소는 주파수(Hz)
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(BUZZER, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);		// 푸시버튼값 읽기
+  if (value == 0) {			// 푸시버튼을 누른 경우
+    for (int i = 0; i < 8; i++) {
+      tone(BUZZER, note[i], 200);		// 음계 주파수음 순차 출력
+      Serial.print("Freqency(Hz): ");
+      Serial.println(note[i]);
+      delay(500);
+    }
+  }
+}

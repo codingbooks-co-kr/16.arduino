@@ -1,0 +1,29 @@
+// 문자열로 LED 점멸 제어-1
+
+const int LED = 6;
+String s;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Please enter <on> or <off>");
+}
+
+void loop() {
+  if (Serial.available()) {		// 수신 데이터가 있을 때
+    char c = Serial.read();		// 수신 데이터(문자) 읽기
+    if (c == '\n') {		// 문자가 개행문자('\n')일 때
+      if (s.equals("on")) {		// 문자열이 on일 때
+        digitalWrite(LED, 1);
+        Serial.println("LED is ON");
+      }
+      if (s.equals("off")) {		// 문자열이 off일 때
+        digitalWrite(LED, 0);
+        Serial.println("LED is OFF");
+      }
+      s = "";			// 문자열 삭제
+    } else {
+      s += c;			// 문자열 누적
+    }
+  }
+}

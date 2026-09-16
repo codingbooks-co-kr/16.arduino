@@ -1,0 +1,29 @@
+// 푸시버튼을 누르면 랜덤 횟수로 LED 점멸 (유형2)
+
+const int BUTTON = 2;
+const int LED = 6;
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);		// 푸시버튼값 읽기
+  if (value == 0) {			// 푸시버튼을 누른 경우
+    int count = random(1, 10);		// 1∼9 사이의 랜덤값(count) 설정
+    Serial.print("Blink count: ");
+    Serial.println(count);			// 반복 횟수(count)를 시리얼 모니터에 표시
+    blink(count);				// 함수 호출부 (유형2)
+  }
+}
+
+void blink(int cnt) {     			// 함수 정의부 (유형2)
+  for (int i = 0; i < cnt; i++) {		// 반복 횟수(cnt)
+    digitalWrite(LED, 1);
+    delay(200);
+    digitalWrite(LED, 0);
+    delay(200);
+  }
+}

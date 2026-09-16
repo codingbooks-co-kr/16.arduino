@@ -1,0 +1,32 @@
+// 가변저항으로 부저 제어-1
+
+const int VARIABLE_R = A1;
+const int BUZZER = 13;
+
+void setup() {
+  pinMode(VARIABLE_R, INPUT);
+  pinMode(BUZZER, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = analogRead(VARIABLE_R);	// 가변저항값(0∼1023) 읽기
+  int num = value / 300;			// 0∼1023 / 300 = 0, 1, 2, 3
+  switch (num) {
+    case 0:        			// num = 0일 때
+      noTone(BUZZER);			// 무음
+      break;
+    case 1:       			// num = 1일 때
+      tone(BUZZER, 200);			// 200Hz 음 출력
+      break;
+    case 2:       			// num = 2일 때
+      tone(BUZZER, 400);			// 400Hz 음 출력
+      break;
+    default:				// num = 3일 때
+      tone(BUZZER, 600);			// 600Hz 음 출력
+      break;
+  }
+  Serial.print("Number: ");
+  Serial.println(num);
+  delay(100);
+}

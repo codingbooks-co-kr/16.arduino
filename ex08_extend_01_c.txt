@@ -1,0 +1,10 @@
+// 비트 검사: value의 n번째 비트를 추출
+
+void setup() {
+  Serial.begin(9600);
+  byte value = 0b10101010;
+  Serial.println(bitRead(value, 0));	// 0번째 비트 추출
+  Serial.println(bitRead(value, 1));	// 1번째 비트 추출
+  Serial.println(bitRead(value, 7));	// 7번째 비트 추출
+}
+void loop() {}

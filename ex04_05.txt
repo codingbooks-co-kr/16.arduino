@@ -1,0 +1,23 @@
+// 푸시버튼을 누를 때마다 LED 한 번 토글
+
+const int BUTTON = 2;			// 상수
+const int LED = 6;			// 상수
+boolean state = false;			// 전역변수
+int count = 0, prev_value = 0;		// 전역변수
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);		// 지역변수 (버튼값 읽기)
+  if (value == 0 && prev_value == 1) {	// 푸시버튼을 누른 순간에만 if문은 참이 됨!
+    state = !state;			// 토글: true → false → true ...
+    digitalWrite(LED, state);
+    Serial.print("Count: ");
+    Serial.println(count++);
+  }
+  prev_value = value;	   // 푸시버튼을 누르기 전 prev_value=1, 누른 후 prev_value=0
+}

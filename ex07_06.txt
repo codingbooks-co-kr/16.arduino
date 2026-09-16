@@ -1,0 +1,25 @@
+// 푸시버튼을 누르면 200ms 주기로 5회 LED 점멸-1 (유형2)
+
+const int BUTTON = 2;
+const int LED = 6;
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);		// 푸시버튼값 읽기
+  if (value == 0) {
+    for (int i = 0; i < 5; i++) {
+      blink(200);				// 함수 호출부 (유형2)
+    }
+  }
+}
+
+void blink(int time) {			// 함수 정의부 (유형2)
+  digitalWrite(LED, 1);
+  delay(time);				// 점멸 주기(time)
+  digitalWrite(LED, 0);
+  delay(time);				// 점멸 주기(time)
+}

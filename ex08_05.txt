@@ -1,0 +1,26 @@
+// 가변저항의 하위 4비트값을 추출하고 LED 4개로 표현 (1이면 점등 0이면 소등)
+
+const int VARIABLE_R = A1;
+const int LED[] = {6, 7, 8, 12};
+
+void setup() {
+  for (int i = 0; i < 4; i++) {		// LED 4개핀 모두 OUTPUT으로 설정
+    pinMode(LED[i], OUTPUT);
+  }
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = analogRead(VARIABLE_R);	// 가변저항값 읽기
+  Serial.println(value, BIN);			// 10진수를 2진 표현으로 시리얼 모니터에 출력
+  for (int i = 0; i < 4; i++) {		// LED 모두 소등
+    digitalWrite(LED[i], 0);
+  }
+  for (int i = 0; i < 4; i++) {
+    int check_bit = 1 << i;			// 1을 좌로 한 비트씩 이동(1→10→100→1000)
+    if (value & check_bit) {		// value의 하위 4비트 중 해당 비트가 1이면
+      digitalWrite(LED[i], 1);		// LED 점등
+    }
+  }
+  delay(100);
+}

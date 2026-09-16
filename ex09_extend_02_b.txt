@@ -1,0 +1,23 @@
+// 수신된 문자열로 서보모터 각도 제어
+
+#include <Servo.h>
+const int SERVO = A0;
+Servo servo;
+
+void setup() {
+  pinMode(SERVO, OUTPUT);
+  servo.attach(SERVO);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available()) {
+    // "angle"과 "\n" 사이의 숫자문자열 처리
+    if (Serial.findUntil("angle", "\n")) {
+      int pos = Serial.parseInt();
+      int value = constrain(pos, 0, 180);
+      servo.write(value);
+      Serial.println(value);
+    }
+  }
+}

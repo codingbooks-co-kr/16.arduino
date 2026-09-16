@@ -1,0 +1,26 @@
+// 푸시버튼을 누를 때마다 부저의 주파수 증가
+
+const int BUTTON = 2;
+const int BUZZER = 13;
+int prev_value = 0, freq = 100;
+
+void setup() {
+  pinMode(BUTTON, INPUT);
+  pinMode(BUZZER, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = digitalRead(BUTTON);		// 푸시버튼값 읽기
+  if (value == 0 && prev_value == 1) {	// 푸시버튼을 누른 순간에만 참이 됨!
+    tone(BUZZER, freq, 500);		// 500msec 동안 주파수(freq)음 출력
+    Serial.print("Freqency(Hz): ");
+    Serial.println(freq);			// 시리얼 모니터 상에서 주파수(freq) 확인
+    if (freq >= 500) {			// 500Hz 이상일 때
+      freq = 100;
+    } else {				// 500Hz 미만일 때
+      freq += 100;
+    }
+  }
+  prev_value = value;			// 푸시버튼을 누르기 전 prev_value=1
+}
